@@ -10,7 +10,7 @@ export default async function AppLayout({
   const session = await auth();
 
   if (session?.user) {
-    return redirect("/dashboard");
+    return redirect("/event-types");
   }
   return (
     <div className="">

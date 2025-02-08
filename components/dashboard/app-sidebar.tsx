@@ -5,9 +5,10 @@ import * as React from "react";
 import {
   BookOpen,
   Bot,
-  Command,
+  Calendar,
   Frame,
   LifeBuoy,
+  Link,
   Map,
   PieChart,
   Send,
@@ -29,6 +30,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { DatePicker } from "./date-picker";
+import { Calendars } from "./calendars";
 
 const data = {
   session: {
@@ -40,89 +43,29 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
+      title: "Event Types",
+      url: "/event-types",
+      icon: Link,
     },
     {
-      title: "Models",
-      url: "#",
+      title: "Meetings",
+      url: "/meetings",
       icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
     },
     {
-      title: "Documentation",
-      url: "#",
+      title: "Availability",
+      url: "/availability",
       icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+    },
+    {
+      title: "Tasks",
+      url: "/tasks",
+      icon: BookOpen,
     },
     {
       title: "Settings",
       url: "#",
       icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
     },
   ],
   navSecondary: [
@@ -133,25 +76,22 @@ const data = {
     },
     {
       title: "Feedback",
-      url: "#",
+      url: "https://github.com/andrihadiansah/calandri/discussions",
       icon: Send,
     },
   ],
-  projects: [
+  calendars: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: "My Calendars",
+      items: ["Personal", "Work", "Family"],
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: "Favorites",
+      items: ["Holidays", "Birthdays"],
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      name: "Other",
+      items: ["Travel", "Reminders", "Deadlines"],
     },
   ],
 };
@@ -171,22 +111,27 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
+              <div className="">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-green-600 text-sidebar-primary-foreground">
+                  <Calendar className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">
+                    Cal<span>Andri</span>
+                  </span>
+                  <span className=" text-xs">
+                    Plan, Sync, Meet – All in One
+                  </span>
                 </div>
-              </a>
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <DatePicker />
+        <Calendars calendars={data.calendars} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

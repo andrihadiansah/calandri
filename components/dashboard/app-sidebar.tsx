@@ -1,19 +1,17 @@
 "use client";
-import { useSession } from "next-auth/react";
 
 import * as React from "react";
 import {
   BookOpen,
   Bot,
   Calendar,
-  Frame,
+  CalendarDays,
+  ChevronRight,
+  ExternalLink,
   LifeBuoy,
   Link,
-  Map,
-  PieChart,
   Send,
   Settings2,
-  SquareTerminal,
 } from "lucide-react";
 
 import { NavMain } from "@/components/dashboard/nav-main";
@@ -24,22 +22,29 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DatePicker } from "./date-picker";
 import { Calendars } from "./calendars";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../ui/collapsible";
 
 const data = {
-  session: {
-    user: {
-      name: <Skeleton className="h-4 w-[75%] mb-1" />,
-      email: <Skeleton className="h-3 w-full" />,
-      image: <Skeleton className="h-8 w-8 rounded-full" />,
-    },
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
     {
@@ -97,10 +102,6 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session, status } = useSession(); // Add status to check loading state
-
-  const user = status === "loading" ? data.session.user : session?.user;
-
   return (
     <Sidebar
       className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
@@ -130,18 +131,42 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <DatePicker />
-        <Calendars calendars={data.calendars} />
+        <SidebarSeparator />
+        <SidebarGroup>
+          <SidebarGroupLabel>Overview</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <Collapsible className="group/collapsible">
+                <SidebarMenuButton asChild disabled>
+                  <CollapsibleTrigger>
+                    <CalendarDays />
+                    <span>My Calendars</span>
+                    <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                  </CollapsibleTrigger>
+                </SidebarMenuButton>
+                <SidebarGroupContent>
+                  <CollapsibleContent>
+                    <DatePicker />
+                    <Calendars calendars={data.calendars} />
+                  </CollapsibleContent>
+                </SidebarGroupContent>
+              </Collapsible>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="#">
+                  <ExternalLink />
+                  <span className="text-sm font-medium">View Public Page</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
+        <SidebarSeparator />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser
-          user={{
-            name: user?.name as string,
-            email: user?.email as string,
-            avatar: user?.image as string,
-          }}
-        />
+        <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
   );

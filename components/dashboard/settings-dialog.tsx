@@ -13,6 +13,7 @@ import {
   MessageCircle,
   Paintbrush,
   Settings,
+  Settings2,
   Video,
 } from "lucide-react";
 
@@ -24,7 +25,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -45,7 +45,7 @@ import {
 
 const data = {
   nav: [
-    { name: "Notifications", icon: Bell },
+    { name: "Profile", icon: Bell },
     { name: "Navigation", icon: Menu },
     { name: "Home", icon: Home },
     { name: "Appearance", icon: Paintbrush },
@@ -64,9 +64,12 @@ export function SettingsDialog() {
   const [open, setOpen] = React.useState(true);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">Open Dialog</Button>
+        <SidebarMenuButton>
+          <Settings2 />
+          Settings
+        </SidebarMenuButton>
       </DialogTrigger>
       <DialogContent className="overflow-hidden p-0 md:max-h-[500px] md:max-w-[700px] lg:max-w-[800px]">
         <DialogTitle className="sr-only">Settings</DialogTitle>
@@ -81,10 +84,7 @@ export function SettingsDialog() {
                   <SidebarMenu>
                     {data.nav.map((item) => (
                       <SidebarMenuItem key={item.name}>
-                        <SidebarMenuButton
-                          asChild
-                          isActive={item.name === "Messages & media"}
-                        >
+                        <SidebarMenuButton asChild>
                           <a href="#">
                             <item.icon />
                             <span>{item.name}</span>

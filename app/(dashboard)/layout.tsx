@@ -23,15 +23,15 @@ export default async function DashboardLayout({
   }
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
-      <SessionProvider refetchOnWindowFocus={false} refetchWhenOffline={false}>
-        <SidebarProvider className="flex flex-col">
-          <SiteHeader />
-          <div className="flex flex-1">
-            <AppSidebar />
-            <SidebarInset>{children}</SidebarInset>
-          </div>
-        </SidebarProvider>
-      </SessionProvider>
+      <SidebarProvider className="flex flex-col">
+        <SiteHeader />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <SidebarInset className="h-[calc(100svh-3.5rem)] top-14">
+            {children}
+          </SidebarInset>
+        </div>
+      </SidebarProvider>
     </div>
   );
 }

@@ -17,7 +17,7 @@ export function AuthModal() {
     <Dialog>
       <DialogTrigger
         className={cn(
-          buttonVariants({ variant: "default" }),
+          buttonVariants({ variant: "default", size: "sm" }),
           "bg-green-600 font-bold"
         )}
       >

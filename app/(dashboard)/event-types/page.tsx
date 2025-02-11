@@ -5,11 +5,9 @@ import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 export default function Page() {
   return (
@@ -51,8 +49,10 @@ export default function Page() {
                   <Ellipsis />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-muted mt-2 border rounded-lg p-2">
-                <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuContent align="end" className="">
+                <DropdownMenuItem asChild>
+                  <Link href={"#"}>Edit</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Duplicate</DropdownMenuItem>
                 <DropdownMenuItem>Delete</DropdownMenuItem>
               </DropdownMenuContent>

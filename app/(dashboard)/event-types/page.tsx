@@ -9,7 +9,6 @@ import {
 import {
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
 } from "@radix-ui/react-dropdown-menu";
 
 export default function Page() {

@@ -64,7 +64,7 @@ export function SettingsDialog() {
   const [open, setOpen] = React.useState(true);
 
   return (
-    <Dialog onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} defaultOpen={open}>
       <DialogTrigger asChild>
         <SidebarMenuButton>
           <Settings2 />

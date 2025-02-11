@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { fontMono, fontSans } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SessionProvider } from "next-auth/react";
 export const metadata: Metadata = {
   title: {
     default: `CalAndri`,
@@ -26,7 +27,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SessionProvider
+            refetchOnWindowFocus={false}
+            refetchWhenOffline={false}
+          >
+            {children}
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

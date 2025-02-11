@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import { SiteHeader } from "@/components/dashboard/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -21,6 +20,7 @@ export default async function DashboardLayout({
   if (!session?.user) {
     return redirect("/");
   }
+
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
       <SidebarProvider className="flex flex-col">

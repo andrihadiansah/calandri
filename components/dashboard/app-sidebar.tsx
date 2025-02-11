@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 
 import { NavMain } from "@/components/dashboard/nav-main";
-import { NavProjects } from "@/components/dashboard/nav-projects";
 import { NavSecondary } from "@/components/dashboard/nav-secondary";
 import { NavUser } from "@/components/dashboard/nav-user";
 import {
@@ -31,7 +30,6 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { Skeleton } from "@/components/ui/skeleton";
 import { DatePicker } from "./date-picker";
 import { Calendars } from "./calendars";
 import {
@@ -39,69 +37,72 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Event Types",
-      url: "/event-types",
-      icon: Link,
-    },
-    {
-      title: "Meetings",
-      url: "/meetings",
-      icon: Bot,
-    },
-    {
-      title: "Availability",
-      url: "/availability",
-      icon: BookOpen,
-    },
-    {
-      title: "Tasks",
-      url: "/tasks",
-      icon: BookOpen,
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "https://github.com/andrihadiansah/calandri/discussions",
-      icon: Send,
-    },
-  ],
-  calendars: [
-    {
-      name: "My Calendars",
-      items: ["Personal", "Work", "Family"],
-    },
-    {
-      name: "Favorites",
-      items: ["Holidays", "Birthdays"],
-    },
-    {
-      name: "Other",
-      items: ["Travel", "Reminders", "Deadlines"],
-    },
-  ],
-};
+import { useSession } from "next-auth/react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading" && !session;
+  const data = {
+    user: {
+      name: session?.user?.name || status,
+      email: session?.user?.email || status,
+      avatar: session?.user?.image || status,
+    },
+    navMain: [
+      {
+        title: "Event Types",
+        url: "/event-types",
+        icon: Link,
+      },
+      {
+        title: "Meetings",
+        url: "/meetings",
+        icon: Bot,
+      },
+      {
+        title: "Availability",
+        url: "/availability",
+        icon: BookOpen,
+      },
+      {
+        title: "Tasks",
+        url: "/tasks",
+        icon: BookOpen,
+      },
+      {
+        title: "Settings",
+        url: "#",
+        icon: Settings2,
+      },
+    ],
+    navSecondary: [
+      {
+        title: "Support",
+        url: "#",
+        icon: LifeBuoy,
+      },
+      {
+        title: "Feedback",
+        url: "https://github.com/andrihadiansah/calandri/discussions",
+        icon: Send,
+      },
+    ],
+    calendars: [
+      {
+        name: "My Calendars",
+        items: ["Personal", "Work", "Family"],
+      },
+      {
+        name: "Favorites",
+        items: ["Holidays", "Birthdays"],
+      },
+      {
+        name: "Other",
+        items: ["Travel", "Reminders", "Deadlines"],
+      },
+    ],
+  };
+
   return (
     <Sidebar
       className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
@@ -166,7 +167,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={data.user} isLoading={isLoading} />
       </SidebarFooter>
     </Sidebar>
   );

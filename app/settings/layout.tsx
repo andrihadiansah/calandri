@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { requireUser } from "@/lib/hooks";
+import { ChevronDown } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export default async function SettingsLayout({
@@ -27,7 +28,7 @@ export default async function SettingsLayout({
     return redirect("/");
   }
   return (
-    <SidebarProvider defaultOpen={true} >
+    <SidebarProvider defaultOpen={true}>
       <AppSidebar />
       <SidebarInset className="relative top-0">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
@@ -37,17 +38,18 @@ export default async function SettingsLayout({
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="/settings">Settings</BreadcrumbLink>
+                  <BreadcrumbPage>Settings</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <ChevronDown className="size-4" />
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <main className="p-4">{children}</main>
+        <main className="p-4 w-full flex justify-center">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

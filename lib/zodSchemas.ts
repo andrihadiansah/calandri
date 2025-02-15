@@ -56,6 +56,5 @@ export const profileSchemas = z.object({
     .regex(/^[a-zA-Z0-9-]+$/, {
       message: "Username can only contain letters, numbers, and -",
     }),
-  email: z.string().email(),
   profileImage: z.string(),
 });

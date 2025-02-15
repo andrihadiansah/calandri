@@ -54,6 +54,7 @@ export function ProfileForm({
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+
   console.log("🚀 ProfileForm Rendered!");
   console.log("🔗 Form ID:", form.id);
   console.log("📩 Form Action:", action);
@@ -77,7 +78,7 @@ export function ProfileForm({
                 type="hidden"
                 name={fields.profileImage.name}
                 key={fields.profileImage.key}
-                value={currentProfileImage}
+                defaultValue={currentProfileImage}
               />
               {currentProfileImage ? (
                 <>
@@ -145,12 +146,7 @@ export function ProfileForm({
             <div className="flex gap-3 flex-col">
               <Label className="text-lg">Email</Label>
               <div className="flex gap-3">
-                <Input
-                  disabled
-                  name={fields.email.name}
-                  key={fields.email.key}
-                  defaultValue={email}
-                />
+                <Input disabled defaultValue={email} />
                 <Button className="hidden">
                   <Plus />
                   Add Email

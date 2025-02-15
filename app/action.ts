@@ -13,12 +13,12 @@ export async function OnboardingAction(prevState: any, formData: FormData) {
   const submission = await parseWithZod(formData, {
     schema: onboardingSchemasValidation({
       async isUsernameUnique() {
-        const exisitingUsername = await prisma.user.findUnique({
+        const existingUsername = await prisma.user.findUnique({
           where: {
             userName: formData.get("userName") as string,
           },
         });
-        return !exisitingUsername;
+        return !existingUsername;
       },
     }),
     async: true,
@@ -55,7 +55,6 @@ export async function ProfileAction(prevState: any, formData: FormData) {
     data: {
       userName: submission.value.userName,
       name: submission.value.fullName,
-      email: submission.value.email,
       image: submission.value.profileImage,
     },
   });

@@ -27,7 +27,6 @@ const data = {
         {
           title: "Profile",
           url: "/settings/account/profile",
-          isActive: true,
         },
         {
           title: "General",
@@ -97,11 +96,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuSub>
                       {item.items.map((item) => (
                         <SidebarMenuSubItem key={item.title}>
-                          <SidebarMenuSubButton
-                            asChild
-                            isActive={item.isActive}
-                          >
-                            <a href={item.url}>{item.title}</a>
+                          <SidebarMenuSubButton asChild>
+                            <Link href={item.url}>{item.title}</Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

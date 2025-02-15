@@ -9,11 +9,11 @@ import {
   ChevronRight,
   ExternalLink,
   LifeBuoy,
-  Link,
+  Link2,
   Send,
   Settings2,
 } from "lucide-react";
-
+import Link from "next/link";
 import { NavMain } from "@/components/dashboard/nav-main";
 import { NavSecondary } from "@/components/dashboard/nav-secondary";
 import { NavUser } from "@/components/dashboard/nav-user";
@@ -28,6 +28,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSubButton,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { DatePicker } from "./date-picker";
@@ -52,11 +53,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {
         title: "Event Types",
         url: "/event-types",
-        icon: Link,
+        icon: Link2,
       },
       {
         title: "Meetings",
-        url: "/meetings",
+        url: "/meetings/upcoming",
         icon: Bot,
       },
       {
@@ -71,7 +72,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Settings",
-        url: "/settings/account/general",
+        url: "/settings/account/profile",
         icon: Settings2,
       },
     ],
@@ -155,10 +156,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="#">
+                <Link href="/availability">
                   <ExternalLink />
-                  <span className="text-sm font-medium">View Public Page</span>
-                </a>
+                  View on Public Page
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

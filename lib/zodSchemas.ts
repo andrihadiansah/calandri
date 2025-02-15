@@ -46,3 +46,16 @@ export function onboardingSchemasValidation(options?: {
       ),
   });
 }
+
+export const profileSchemas = z.object({
+  fullName: z.string().min(3).max(150),
+  userName: z
+    .string()
+    .min(3)
+    .max(150)
+    .regex(/^[a-zA-Z0-9-]+$/, {
+      message: "Username can only contain letters, numbers, and -",
+    }),
+  email: z.string().email(),
+  profileImage: z.string(),
+});

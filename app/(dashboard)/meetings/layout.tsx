@@ -1,3 +1,7 @@
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <section className="p-4 top-14">
@@ -6,19 +10,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <p>
           See upcoming and past events booked through your event type links.
         </p>
-        <nav className="w-full flex">
-          <a href="/meetings/upcoming" className="">
+        <nav className="w-full flex my-6">
+          <Link
+            href="/meetings/upcoming"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-r-0 rounded-r-none w-full"
+            )}
+          >
             Upcoming
-          </a>
-          <a href="/meetings/unconfirmed" className="">
+          </Link>
+          <Link
+            href="/meetings/unconfirmed"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "rounded-none w-full"
+            )}
+          >
             Unconfirmed
-          </a>
-          <a href="/meetings/past" className="">
+          </Link>
+          <Link
+            href="/meetings/past"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              " rounded-none border-s-0 w-full"
+            )}
+          >
             Past
-          </a>
-          <a href="/meetings/canceled" className="">
+          </Link>
+          <Link
+            href="/meetings/canceled"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-s-0 rounded-s-none w-full"
+            )}
+          >
             Canceled
-          </a>
+          </Link>
         </nav>
       </header>
       <main>{children}</main>

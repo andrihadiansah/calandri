@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export function SubmitButton({ text, variant, className }: iAppProps) {
   return (
     <>
       {pending ? (
-        <Button disabled variant={"outline"} className="w-full">
+        <Button type="submit" disabled variant={"outline"} className="w-full">
           <Loader2 className="size-4 mr-2 animate-spin" />
           Please wait..
         </Button>

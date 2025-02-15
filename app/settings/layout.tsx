@@ -17,6 +17,7 @@ import { requireUser } from "@/lib/hooks";
 import { ChevronDown } from "lucide-react";
 import { redirect } from "next/navigation";
 
+import { Toaster } from "@/components/ui/sonner";
 export default async function SettingsLayout({
   children,
 }: {
@@ -49,7 +50,11 @@ export default async function SettingsLayout({
             </Breadcrumb>
           </div>
         </header>
-        <main className="p-4 w-full flex justify-center">{children}</main>
+        <main className="p-4 w-full flex justify-center">
+          {children}
+
+          <Toaster />
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

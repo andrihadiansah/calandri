@@ -14,7 +14,7 @@ export default async function AppLayout({
   const session = await auth();
 
   if (session?.user) {
-    return redirect("/event-types");
+    return redirect("/onboarding");
   }
   return (
     <div className="">

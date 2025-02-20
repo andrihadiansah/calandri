@@ -1,9 +1,13 @@
-// app.
+// app/action.ts
 "use server";
 
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/hooks";
-import { onboardingSchemasValidation, profileSchemas } from "@/lib/zodSchemas";
+import {
+  eventTypeSchema,
+  onboardingSchemasValidation,
+  profileSchemas,
+} from "@/lib/zodSchemas";
 import { parseWithZod } from "@conform-to/zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -143,4 +147,30 @@ export async function updateAvailabilityAction(formData: FormData) {
   } catch (error) {
     console.log("Error updating availability", error);
   }
+}
+
+export async function createEventTypeAction(
+  prevState: any,
+  formData: FormData
+) {
+  const session = await requireUser();
+  const submission = parseWithZod(formData, {
+    schema: eventTypeSchema,
+  });
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  await prisma.eventType.create({
+    data: {
+      title: submission.value.title as string,
+      duration: submission.value.duration as number,
+      url: submission.value.url as string,
+      description: submission.value.description as string,
+      videoCallSoftware: submission.value.videoCallSoftware as string,
+      userId: session.user?.id as string,
+    },
+  });
+
+  return redirect("/event-types");
 }

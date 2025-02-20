@@ -94,3 +94,26 @@ export function profileSchemas(options?: {
       ),
   });
 }
+
+export const eventTypeSchema = z.object({
+  title: z.string().min(3).max(150),
+  duration: z.number().min(10, {
+    message: "Duration must be at least 10 minutes",
+  }),
+  url: z
+    .string()
+    .min(3, { message: "URL must be at least 3 characters" })
+    .max(150)
+    .regex(/^[a-zA-Z0-9-]+$/, {
+      message: "URL can only contain letters, numbers, and -",
+    }),
+  description: z
+    .string()
+    .min(10, {
+      message: "Description must be at least 10 characters",
+    })
+    .max(500),
+  videoCallSoftware: z
+    .string()
+    .min(1, { message: "Please select a valid video call software" }),
+});

@@ -48,7 +48,7 @@ export function ProfileForm({
     lastResult,
     onValidate({ formData }) {
       return parseWithZod(formData, {
-        schema: profileSchemas,
+        schema: profileSchemas(),
       });
     },
     shouldValidate: "onBlur",

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="p-4 top-14">
+    <section className=" top-14">
       <header className="flex flex-col ">
         <h3>Meetings</h3>
         <p>

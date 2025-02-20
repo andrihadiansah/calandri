@@ -36,7 +36,8 @@ export default function OnboardingRoute() {
         <CardHeader className="space-y-3">
           <CardTitle className="">Welcome to CalAndri</CardTitle>
           <CardDescription>
-            We need the following information to set up your profile
+            It's take two Step. We need the following information to set up your
+            profile
           </CardDescription>
         </CardHeader>
         <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
@@ -47,7 +48,7 @@ export default function OnboardingRoute() {
                 name={fields.fullName.name}
                 defaultValue={fields.fullName.initialValue}
                 key={fields.fullName.key}
-                placeholder="Your username"
+                placeholder="Your Name"
               />
               <p className="text-red-700 text-sm line-clamp-1">
                 {fields.fullName.errors}
